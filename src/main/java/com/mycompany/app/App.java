@@ -6,7 +6,7 @@ package com.mycompany.app;
 public class App
 {
 
-    private final String message = "Hello World! For - Auto Updat";
+    private final String message = "Hello World! For - Auto Update";
 
     public App() {}
 
