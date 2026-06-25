@@ -1,0 +1,123 @@
+Linux Host Reboot API Workflow
+1. Purpose
+This document describes the end-to-end workflow for rebooting a Linux host through the Self-Service Portal using the Linux Host Reboot API. It combines the portal process and backend API execution into a single workflow.
+2. Scope
+This workflow enables authorized users to reboot Linux servers through a self-service interface without manual intervention from the operations team.
+3. Components
+Self-Service Portal
+API Gateway
+Authentication & Authorization Service
+Input Validation Service
+Request Group Creation Service
+Linux Host Reboot API
+Target Linux Server
+Status Monitoring Service
+4. Workflow
+Step 1: Access Self-Service Portal
+The user logs into the Self-Service Portal using valid credentials.
+Step 2: Select Linux Host Reboot
+Navigate to the Linux Host Reboot service.
+Step 3: Enter Server Details
+Provide the required server information such as:
+Hostname
+Environment
+Business Justification (if required)
+Step 4: Submit Request
+Click Submit to initiate the reboot request.
+Step 5: API Receives Request
+The API Gateway receives the request from the portal.
+Step 6: Authentication & Authorization
+The system validates:
+User identity
+User permissions
+Access to the requested server
+If validation fails, the request is rejected.
+Step 7: Input Validation
+The system verifies:
+Hostname exists
+Server is eligible for reboot
+Mandatory fields are completed
+Invalid requests are returned with an error.
+Step 8: Create Request Group
+A request group is created to track the execution.
+Step 9: Execute Linux Reboot
+The Linux Host Reboot API sends the reboot command to the target Linux server.
+Step 10: Monitor Execution
+The execution engine monitors the reboot progress.
+Step 11: Update Status
+The portal updates the request status based on the execution result.
+Possible statuses:
+SUBMITTED
+IN PROGRESS
+SUCCESS
+UNKNOWN
+PROVIDER FAILED
+Step 12: User Verification
+The user monitors the request until completion.
+5. End-to-End Workflow
+Start
+↓
+User Login
+↓
+Open Self-Service Portal
+↓
+Select Linux Host Reboot
+↓
+Enter Server Details
+↓
+Submit Request
+↓
+API Gateway
+↓
+Authentication & Authorization
+↓
+Input Validation
+↓
+Create Request Group
+↓
+Execute Linux Host Reboot API
+↓
+Target Linux Server
+↓
+Capture Execution Status
+↓
+Update Portal Status
+↓
+User Monitors Request
+↓
+End
+6. Exception Handling
+Scenario
+Action
+Authentication Failed
+Reject Request
+Authorization Failed
+Reject Request
+Invalid Hostname
+Return Validation Error
+API Failure
+Update Status as PROVIDER FAILED
+Timeout
+Update Status as UNKNOWN
+Successful Execution
+Update Status as SUCCESS
+7. Status Definitions
+Status
+Description
+SUBMITTED
+Request accepted by the system
+IN PROGRESS
+Reboot operation is currently running
+SUCCESS
+Reboot completed successfully
+UNKNOWN
+Unable to determine execution result
+PROVIDER FAILED
+Backend execution failed
+8. Benefits
+Automated Linux server reboot
+Reduced manual intervention
+Standardized execution process
+Real-time request tracking
+Improved operational efficiency
+Secure access through authentication and authorization
